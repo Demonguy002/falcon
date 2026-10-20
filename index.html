@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#03050d">
+<title>FALCON SOVEREIGN — Final Launch V6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03050c;--cyan:#55eaff;--blue:#168cff;--violet:#a56aff;--gold:#e8c87d;--white:#f4f9ff;--muted:#8096ac;--line:rgba(85,234,255,.22)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--white);font-family:Rajdhani,Arial,sans-serif;overflow:hidden}button{font:inherit;color:inherit}button:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}#app{position:relative;width:100%;height:100%;min-height:560px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 45%,#0b1b34 0,#050d1c 35%,#03050c 73%)}
+#app{position:relative;width:100%;height:100%;min-height:560px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 44%,#0a1730 0,#050b17 43%,#02040a 82%)}.cinema-sweep{position:absolute;inset:0;pointer-events:none;z-index:-2;overflow:hidden;background:linear-gradient(115deg,transparent 0%,rgba(16,67,117,.035) 35%,rgba(25,112,180,.055) 50%,rgba(128,83,153,.025) 59%,transparent 76%)}.cinema-sweep:before{content:"";position:absolute;top:-25%;bottom:-25%;left:-30%;width:24%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(85,234,255,.045),rgba(232,200,125,.07),transparent);animation:beamPass 14s ease-in-out infinite}.cinema-sweep:after{content:"";position:absolute;left:5%;right:5%;top:18%;height:1px;background:linear-gradient(90deg,transparent,rgba(85,234,255,.22),rgba(232,200,125,.15),transparent);opacity:.65;animation:railGlow 7s ease-in-out infinite}.scanlines{display:none}
+.frame-corner{position:absolute;width:48px;height:48px;border-color:rgba(85,234,255,.38);border-style:solid;z-index:16;pointer-events:none}.tl{top:22px;left:22px;border-width:1px 0 0 1px}.tr{top:22px;right:22px;border-width:1px 1px 0 0}.bl{bottom:22px;left:22px;border-width:0 0 1px 1px}.br{bottom:22px;right:22px;border-width:0 1px 1px 0}
+.topbar{position:absolute;top:27px;left:5%;right:5%;display:flex;align-items:center;justify-content:space-between;gap:14px;z-index:21;font-family:Orbitron,sans-serif;text-transform:uppercase;letter-spacing:.15em;font-size:clamp(8px,.78vw,11px);color:#c9e8f7}.brand-mini{display:flex;align-items:center;gap:10px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 13px var(--cyan);animation:dotPulse 1.8s infinite}.top-right{color:#8099ad;text-align:right}.top-right span{color:var(--gold)}
+.bottom-bar{position:absolute;bottom:25px;left:5%;right:5%;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:21;color:#718ba1;font-family:Orbitron,sans-serif;font-size:clamp(7px,.66vw,9px);letter-spacing:.13em;text-transform:uppercase}.bottom-bar b{font-weight:500;color:var(--cyan)}.bottom-center{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;text-align:center}.sound-btn,.skip-btn{position:absolute;right:5%;bottom:64px;z-index:24;border:1px solid rgba(85,234,255,.35);background:rgba(3,12,26,.72);backdrop-filter:blur(8px);min-height:38px;padding:0 15px;display:flex;align-items:center;gap:9px;font:9px Orbitron,sans-serif;letter-spacing:.16em;cursor:pointer}.sound-btn{right:auto;left:5%}.sound-led{width:6px;height:6px;border-radius:50%;background:#566777}.sound-btn.on .sound-led{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}.hidden{display:none!important}
+.cinema-sweep{animation:ambientSheen 16s ease-in-out infinite alternate}.dept-label{font-size:.78em;color:#728ea6;letter-spacing:.2em}.top-right{line-height:1.75}.dialogue-wrap::before{content:"";position:absolute;left:8%;right:8%;top:49%;height:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(85,234,255,.6),rgba(232,200,125,.75),transparent);filter:drop-shadow(0 0 7px rgba(85,234,255,.35))}.dialogue-wrap.sweep::before{animation:titleSweep .9s ease-out both}.dialogue-sub{min-height:1.2em}.intro .eyebrow{animation:riseIn .9s .15s both}.intro h1{animation:riseIn 1.1s .28s both}.intro p{animation:riseIn 1.05s .42s both}.buttons{animation:riseIn 1.1s .58s both}.intro-note{animation:riseIn 1.1s .72s both}
+.stage{position:absolute;inset:0;display:grid;place-items:center;padding:92px 5.5% 88px;z-index:2}#introView:not(.active){display:none}.intro{text-align:center;width:min(940px,100%);transition:opacity .8s ease,transform .8s ease}.intro.fade-out{opacity:0;transform:translateY(-18px) scale(.985);pointer-events:none}.eyebrow{display:inline-flex;align-items:center;gap:12px;font:10px Orbitron,sans-serif;letter-spacing:.34em;color:#a1e7f1;text-transform:uppercase}.eyebrow:before,.eyebrow:after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan))}.eyebrow:after{transform:rotate(180deg)}.intro h1{font-family:Cinzel,serif;font-weight:700;font-size:clamp(34px,6.4vw,84px);line-height:1.06;letter-spacing:.07em;margin:27px 0 17px;text-shadow:0 0 30px rgba(44,193,255,.18)}.shine{background:linear-gradient(105deg,#efcc78 10%,#fff 28%,#79eaff 48%,#b5a0ff 67%,#efd18a 89%);background-size:240% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:metalSweep 5s linear infinite}.intro p{font-size:clamp(13px,1.45vw,17px);letter-spacing:.33em;text-transform:uppercase;color:#89a8bc;margin:0 0 35px}.buttons{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}.primary-btn,.secondary-btn,.mini-btn{border:1px solid rgba(85,234,255,.48);background:linear-gradient(115deg,rgba(8,35,57,.9),rgba(7,13,29,.88));min-height:47px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:12px;font-family:Orbitron,sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}.primary-btn{color:#effdff;border-color:rgba(85,234,255,.86);box-shadow:0 0 26px rgba(20,180,255,.1),inset 0 0 20px rgba(20,180,255,.08)}.primary-btn:hover,.secondary-btn:hover,.mini-btn:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 27px rgba(20,180,255,.22)}.primary-btn .play{display:inline-block;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid var(--cyan)}.secondary-btn{border-color:rgba(126,152,176,.26);color:#a6bccb;background:rgba(4,8,16,.45)}.intro-note{font:9px Orbitron,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#59778e;margin-top:27px}
+#countdownView,#dialogueView,#videoView,#endView{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:90px 5% 88px;z-index:4}#countdownView.active,#dialogueView.active,#videoView.active,#endView.active{display:grid}.counter-wrap{position:relative;width:min(49vh,400px);min-width:220px;aspect-ratio:1;display:grid;place-items:center}.counter-ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(85,234,255,.34);box-shadow:0 0 50px rgba(0,155,255,.1),inset 0 0 42px rgba(0,155,255,.05);animation:counterBreath 1s ease-in-out infinite}.counter-ring:before,.counter-ring:after{content:'';position:absolute;inset:12px;border-radius:50%;border:1px dashed rgba(85,234,255,.6);animation:spin 8s linear infinite}.counter-ring:after{inset:34px;border-color:rgba(232,200,125,.5);animation-duration:15s;animation-direction:reverse}.counter-number{font:500 clamp(86px,18vw,174px)/1 Orbitron,sans-serif;color:#f0f8ff;text-shadow:0 0 14px rgba(85,234,255,.7),0 0 60px rgba(16,140,255,.55);animation:numberPop .76s ease both}.phase-label{position:absolute;bottom:-42px;font:9px Orbitron,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#8cb9c9;white-space:nowrap}.count-progress{position:absolute;bottom:-70px;width:68%;height:2px;background:rgba(83,212,255,.15);overflow:hidden}.count-progress span{display:block;width:100%;height:100%;transform-origin:left;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--gold));box-shadow:0 0 15px var(--cyan)}
+.dialogue-wrap{position:relative;width:min(1160px,100%);text-align:center;transform:translateY(-1%)}.dialogue-kicker{font:10px Orbitron,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;opacity:.88}.dialogue-kicker .tiny-dot{color:var(--gold);padding:0 9px}.dialogue-text{font:700 clamp(26px,5.25vw,68px)/1.22 Cinzel,serif;letter-spacing:.04em;text-transform:uppercase;max-width:1150px;margin:0 auto;text-wrap:balance;text-shadow:0 5px 38px rgba(0,0,0,.85);min-height:2.45em;display:flex;justify-content:center;align-content:center;align-items:center;flex-wrap:wrap;gap:.15em .28em}.word{display:inline-flex;white-space:pre}.glyph{display:inline-block;opacity:0;transform:translateY(.5em) rotateX(-48deg);filter:blur(5px);animation:glyphEnter .58s cubic-bezier(.15,.8,.2,1) forwards;animation-delay:var(--delay,0ms)}.dialogue-text .accent{color:var(--gold);text-shadow:0 0 25px rgba(232,200,125,.24)}.dialogue-text .accent .glyph{color:inherit}.dialogue-sub{font:10px Orbitron,sans-serif;letter-spacing:.27em;text-transform:uppercase;color:#6f91a8;margin-top:27px;opacity:0;animation:subEnter .7s .3s ease forwards}.dialogue-rule{width:190px;height:1px;margin:29px auto 0;background:linear-gradient(90deg,transparent,var(--cyan),var(--gold),transparent);box-shadow:0 0 13px rgba(85,234,255,.45);transform-origin:center;animation:ruleSweep 2.4s linear infinite}.dialogue-progress{width:min(430px,72vw);height:2px;margin:32px auto 0;background:rgba(88,220,255,.13);overflow:hidden}.dialogue-progress span{display:block;width:100%;height:100%;transform-origin:left;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--gold));box-shadow:0 0 10px var(--cyan)}.dialogue-meta{position:absolute;bottom:112px;left:50%;transform:translateX(-50%);white-space:nowrap;font:8px Orbitron,sans-serif;letter-spacing:.23em;color:#4f7793;text-transform:uppercase}
+#videoView{padding:70px 5% 88px;background:rgba(0,0,0,.12)}.video-hud{position:absolute;inset:5.2% 4.4%;border:1px solid rgba(85,234,255,.22);pointer-events:none}.video-hud:before,.video-hud:after{content:'';position:absolute;width:52px;height:52px;border:solid rgba(85,234,255,.7)}.video-hud:before{top:-1px;left:-1px;border-width:1px 0 0 1px}.video-hud:after{bottom:-1px;right:-1px;border-width:0 1px 1px 0}.video-topline{position:absolute;top:3.2%;left:5.4%;right:5.4%;display:flex;justify-content:space-between;gap:12px;font:9px Orbitron,sans-serif;letter-spacing:.16em;color:#91afc3;text-transform:uppercase}.video-topline b{color:var(--cyan);font-weight:500}.video-bottomline{position:absolute;bottom:3.3%;left:5.4%;right:5.4%;display:flex;justify-content:space-between;gap:12px;font:8px Orbitron,sans-serif;letter-spacing:.14em;color:#7490a4;text-transform:uppercase}.video-frame{width:min(88vw,1360px);max-height:calc(100% - 20px);aspect-ratio:16/9;position:relative;border:1px solid rgba(85,234,255,.38);background:#02050b;box-shadow:0 0 0 6px rgba(26,142,255,.035),0 0 75px rgba(0,128,255,.18);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:frameIn 1.1s ease both}.video-frame:before{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(115deg,rgba(22,140,255,.06),transparent 35%,rgba(164,99,255,.05));mix-blend-mode:screen}.video-frame video{width:100%;height:100%;display:block;object-fit:contain;background:#02050b}.video-overlay{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;flex-direction:column;gap:4px;padding:17px 22px;background:linear-gradient(0deg,rgba(1,4,11,.68),transparent);text-align:left;opacity:1;transition:opacity .6s}.video-overlay span{font:600 clamp(10px,1vw,13px) Orbitron,sans-serif;letter-spacing:.21em}.video-overlay strong{font:500 11px Cinzel,serif;color:var(--gold);letter-spacing:.17em;text-transform:uppercase}.video-controls{position:absolute;left:50%;bottom:7.4%;transform:translateX(-50%);display:flex;gap:10px;z-index:5;flex-wrap:wrap;justify-content:center}.mini-btn{min-height:35px;padding:0 13px;font-size:8px;letter-spacing:.13em;background:rgba(3,12,26,.76)}
+.end-card{width:min(820px,100%);text-align:center;animation:quoteIn .9s cubic-bezier(.2,.8,.2,1) both}.end-overline{font:10px Orbitron,sans-serif;letter-spacing:.31em;color:var(--cyan);text-transform:uppercase}.end-title{font:700 clamp(42px,8vw,100px)/.98 Cinzel,serif;letter-spacing:.1em;margin:27px 0 12px;background:linear-gradient(105deg,#f5d88f,#fff,#6fe9ff,#b8a3ff,#f2cf79);background-size:220% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:metalSweep 5s linear infinite;text-shadow:none}.end-sub{font:12px Orbitron,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#b9cddd}.end-divider{height:1px;width:min(350px,75%);margin:27px auto 29px;background:linear-gradient(90deg,transparent,var(--cyan),var(--gold),transparent);box-shadow:0 0 12px rgba(85,234,255,.4)}
+#flash{position:absolute;inset:0;z-index:14;pointer-events:none;background:radial-gradient(circle at 50% 49%,rgba(100,236,255,.9),rgba(40,145,255,.22) 24%,transparent 58%);opacity:0;mix-blend-mode:screen}#flash.fire{animation:flashOut .8s ease-out both}.edge-glow{position:absolute;inset:0;z-index:-2;pointer-events:none;box-shadow:inset 0 0 150px rgba(0,0,0,.62),inset 0 0 85px rgba(13,117,255,.08)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes beamPass{0%{left:-35%;opacity:0}15%{opacity:1}75%{opacity:.7}100%{left:112%;opacity:0}}@keyframes railGlow{0%,100%{opacity:.28;transform:scaleX(.88)}50%{opacity:.65;transform:scaleX(1)}}@keyframes ambientSheen{0%,100%{filter:brightness(.94)}50%{filter:brightness(1.08)}}@keyframes titleSweep{0%{opacity:0;transform:scaleX(.4)}22%{opacity:.9}100%{opacity:0;transform:scaleX(1)}}@keyframes riseIn{from{opacity:0;transform:translateY(18px);filter:blur(4px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes metalSweep{to{background-position:240% center}}@keyframes dotPulse{0%,100%{opacity:.45;box-shadow:0 0 4px var(--cyan)}50%{opacity:1;box-shadow:0 0 16px var(--cyan)}}@keyframes numberPop{0%{transform:scale(1.22);filter:blur(5px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}@keyframes glyphEnter{0%{opacity:0;transform:translateY(.5em) rotateX(-48deg);filter:blur(5px)}100%{opacity:1;transform:translateY(0) rotateX(0);filter:blur(0)}}@keyframes quoteIn{0%{opacity:0;transform:translateY(23px) scale(.98);filter:blur(6px)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes subEnter{to{opacity:1}}@keyframes ruleSweep{0%{transform:scaleX(.56);opacity:.55}50%{transform:scaleX(1);opacity:1}100%{transform:scaleX(.56);opacity:.55}}@keyframes frameIn{from{opacity:0;transform:scale(.975);filter:brightness(.4)}to{opacity:1;transform:scale(1);filter:brightness(1)}}@keyframes flashOut{0%{opacity:0}10%{opacity:.7}100%{opacity:0}}@keyframes counterBreath{0%,100%{box-shadow:0 0 35px rgba(0,155,255,.08),inset 0 0 35px rgba(0,155,255,.03)}50%{box-shadow:0 0 65px rgba(0,155,255,.18),inset 0 0 50px rgba(0,155,255,.08)}}
+@media(max-width:650px){.topbar{top:17px}.frame-corner{width:27px;height:27px}.tl{top:12px;left:12px}.tr{top:12px;right:12px}.bl{bottom:12px;left:12px}.br{bottom:12px;right:12px}.bottom-bar{bottom:13px;justify-content:center}.bottom-bar span:first-child,.bottom-bar .bottom-center{display:none}.sound-btn,.skip-btn{bottom:49px;min-height:34px;padding:0 10px;font-size:8px}.sound-btn{left:5%}.intro p{letter-spacing:.17em;line-height:1.7}.top-right{max-width:58%;font-size:7px;letter-spacing:.08em}.dept-label{letter-spacing:.12em}.stage{padding:75px 5% 82px}.dialogue-text{font-size:clamp(24px,7vw,43px);line-height:1.3;min-height:3.1em}.dialogue-kicker{font-size:8px;letter-spacing:.22em;margin-bottom:19px}.dialogue-sub{letter-spacing:.14em;font-size:8px}.dialogue-meta{bottom:86px;font-size:7px;letter-spacing:.1em}.video-frame{width:92vw}.video-hud{inset:8% 3%}.video-topline{top:4.5%;font-size:7px;letter-spacing:.08em}.video-bottomline{bottom:3.3%;font-size:7px;letter-spacing:.08em}.video-controls{bottom:7%;width:90%;}.mini-btn{font-size:7px;padding:0 9px}.phase-label{font-size:8px;letter-spacing:.14em}.counter-wrap{width:min(43vh,330px)}.end-sub{letter-spacing:.18em;font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Continuous animated-logo finale: clean rectangular presentation frame, no extra circles. */
+#loopView{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:84px 5% 72px;z-index:4;background:radial-gradient(ellipse at 50% 44%,rgba(10,25,47,.62),rgba(2,5,12,.93) 68%)}
+#loopView.active{display:grid;animation:loopViewEnter .85s cubic-bezier(.2,.8,.2,1) both}
+.loop-layout{width:min(1240px,100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,min(42vw,470px)) minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,50px)}
+.loop-side{text-align:left;align-self:center;min-width:0;animation:loopSideIn .85s .18s both}
+.loop-side.right{text-align:right;animation-delay:.3s}
+.loop-index{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font:9px Orbitron,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.loop-index:before{content:"";display:inline-block;width:18px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.loop-side.right .loop-index{flex-direction:row-reverse}
+.loop-side h2{font:700 clamp(23px,3vw,42px)/1.05 Cinzel,serif;letter-spacing:.08em;margin:17px 0 12px;color:#f3f8ff;text-shadow:0 0 22px rgba(85,234,255,.16)}
+.loop-side h2 span{color:var(--gold)}
+.loop-side p{color:#839ab0;font:11px/1.85 Rajdhani,Arial,sans-serif;letter-spacing:.08em;max-width:230px;margin:0}
+.loop-side.right p{margin-left:auto}
+.loop-side .side-rule{width:100%;max-width:180px;height:1px;background:linear-gradient(90deg,var(--cyan),rgba(85,234,255,0));margin-top:22px}
+.loop-side.right .side-rule{margin-left:auto;background:linear-gradient(270deg,var(--gold),rgba(232,200,125,0))}
+.loop-frame{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#02050c;border:1px solid rgba(85,234,255,.42);box-shadow:0 0 0 5px rgba(20,114,190,.045),0 0 42px rgba(0,143,255,.13),inset 0 0 24px rgba(85,234,255,.05);animation:loopFrameIn 1s cubic-bezier(.16,.82,.24,1) both}
+.loop-frame:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(112deg,rgba(85,234,255,.08),transparent 29%,transparent 67%,rgba(232,200,125,.06));mix-blend-mode:screen}
+.loop-frame:after{content:"";position:absolute;z-index:3;pointer-events:none;top:0;bottom:0;left:-40%;width:28%;transform:skewX(-17deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.11),rgba(85,234,255,.12),transparent);animation:loopSheen 6s ease-in-out infinite 1s}
+.loop-frame video{display:block;width:100%;height:100%;object-fit:contain;background:#02050c}
+.loop-corner{position:absolute;z-index:4;width:26px;height:26px;border-color:rgba(85,234,255,.9);border-style:solid;pointer-events:none;filter:drop-shadow(0 0 5px rgba(85,234,255,.32))}
+.loop-corner.a{top:8px;left:8px;border-width:1px 0 0 1px}.loop-corner.b{top:8px;right:8px;border-width:1px 1px 0 0}.loop-corner.c{bottom:8px;left:8px;border-width:0 0 1px 1px}.loop-corner.d{bottom:8px;right:8px;border-width:0 1px 1px 0}
+.loop-overline{position:absolute;left:14px;right:14px;top:14px;z-index:5;display:flex;justify-content:space-between;gap:8px;text-align:left;color:#d8ecf5;text-shadow:0 1px 8px #000;font:8px Orbitron,sans-serif;letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+.loop-overline b{color:var(--cyan);font-weight:500}
+.loop-footer{position:absolute;bottom:62px;left:5%;right:5%;display:flex;flex-direction:column;align-items:center;gap:13px;z-index:7}
+.loop-footer-line{display:flex;align-items:center;justify-content:center;gap:12px;color:#8aa7ba;font:9px Orbitron,sans-serif;letter-spacing:.19em;text-transform:uppercase}
+.loop-footer-line:before,.loop-footer-line:after{content:"";height:1px;width:clamp(20px,6vw,80px);background:linear-gradient(90deg,transparent,var(--cyan));opacity:.7}
+.loop-footer-line:after{transform:rotate(180deg)}
+.loop-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.loop-actions .mini-btn{min-height:34px}
+#loopAudioBtn{border-color:rgba(232,200,125,.65);color:#f4d990}
+@keyframes loopViewEnter{from{opacity:0;filter:brightness(.5);transform:scale(1.015)}to{opacity:1;filter:brightness(1);transform:scale(1)}}
+@keyframes loopSideIn{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@keyframes loopFrameIn{from{opacity:0;transform:scale(.94);filter:brightness(.5)}to{opacity:1;transform:scale(1);filter:brightness(1)}}
+@keyframes loopSheen{0%,36%{left:-40%;opacity:0}45%{opacity:1}68%,100%{left:120%;opacity:0}}
+@media(max-width:900px){.loop-layout{grid-template-columns:minmax(0,1fr) minmax(240px,min(44vw,390px));gap:22px}.loop-side.right{display:none}.loop-side h2{font-size:clamp(22px,4vw,34px)}.loop-footer{bottom:55px}}
+@media(max-width:600px){#loopView{padding:74px 6% 106px}.loop-layout{grid-template-columns:1fr;gap:14px;justify-items:center}.loop-side{display:none}.loop-frame{width:min(76vw,47vh,370px)}.loop-overline{font-size:7px}.loop-footer{bottom:57px;left:4%;right:4%;gap:10px}.loop-footer-line{font-size:7px;letter-spacing:.1em}.loop-actions{gap:7px}.loop-actions .mini-btn{padding:0 8px;font-size:7px}}
+@media(prefers-reduced-motion:reduce){#loopView.active,.loop-side,.loop-frame,.loop-frame:after{animation:none!important}}
+
+
+/* V4 end slate: TEAM above the looping square logo video, FALCON below. No portal circles. */
+#loopView{position:absolute;inset:0;display:none;place-items:center;z-index:4;padding:74px 18px 78px;background:linear-gradient(132deg,#02040a 0%,#061326 48%,#02040a 100%);overflow:hidden}
+#loopView.active{display:grid;animation:loopOutroIn .75s cubic-bezier(.2,.8,.2,1) both}
+#loopView:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 0%,rgba(48,151,211,.035) 44%,rgba(232,200,125,.045) 53%,transparent 72%);animation:outroLightSweep 9s ease-in-out infinite}
+.loop-outro{position:relative;z-index:1;width:min(100%,850px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(5px,1vh,10px);text-align:center;min-height:0}
+.loop-outro-kicker{font:500 clamp(8px,.8vw,10px) Orbitron,sans-serif;letter-spacing:.24em;color:#9ab6c8;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:2px;animation:outroTextIn .65s .05s both}
+.loop-led,.loop-status-live i{width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 11px var(--cyan);display:inline-block;animation:loopLedPulse 1.8s ease-in-out infinite}
+.loop-kicker-divider{color:var(--gold)}
+.loop-team-word{font:600 clamp(15px,2.4vh,22px)/1 Orbitron,sans-serif;letter-spacing:.48em;color:#d4eaf4;padding-left:.48em;text-shadow:0 0 18px rgba(85,234,255,.18);animation:outroTextIn .7s .12s both}
+.loop-video-shell{position:relative;width:min(46vh,390px,72vw);aspect-ratio:1 / 1;flex:0 1 auto;max-height:46vh;overflow:hidden;background:#02050c;border:1px solid rgba(85,234,255,.58);box-shadow:0 0 0 1px rgba(232,200,125,.15),0 0 36px rgba(0,135,255,.2),0 12px 45px rgba(0,0,0,.45);animation:outroVideoIn .9s .18s cubic-bezier(.16,.82,.24,1) both}
+.loop-video-shell:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(112deg,rgba(85,234,255,.06),transparent 34%,transparent 72%,rgba(232,200,125,.06));mix-blend-mode:screen}
+.loop-video-shell:after{content:"";position:absolute;z-index:3;pointer-events:none;top:0;bottom:0;left:-38%;width:22%;transform:skewX(-17deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),rgba(85,234,255,.14),transparent);animation:loopOutroSheen 5.6s ease-in-out infinite 1.4s}
+.loop-video-shell video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;background:#02050c}
+.loop-frame-corner{position:absolute;z-index:4;width:22px;height:22px;border-color:rgba(85,234,255,.9);border-style:solid;pointer-events:none;filter:drop-shadow(0 0 4px rgba(85,234,255,.25))}
+.loop-frame-corner.top-left{top:7px;left:7px;border-width:1px 0 0 1px}.loop-frame-corner.top-right{top:7px;right:7px;border-width:1px 1px 0 0}.loop-frame-corner.bottom-left{bottom:7px;left:7px;border-width:0 0 1px 1px}.loop-frame-corner.bottom-right{bottom:7px;right:7px;border-width:0 1px 1px 0}
+.loop-video-label{position:absolute;z-index:5;top:11px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;color:#e0f4fc;text-shadow:0 1px 8px #000;font:7px Orbitron,sans-serif;letter-spacing:.14em;pointer-events:none}
+.loop-status-live{display:flex;align-items:center;gap:6px;color:#c4e9f2}.loop-status-live i{width:5px;height:5px;flex-basis:5px}
+.loop-falcon-word{font:700 clamp(37px,6.1vh,66px)/.94 Cinzel,serif;letter-spacing:.13em;margin:2px 0 0;padding-left:.13em;background:linear-gradient(105deg,#f3d48c 4%,#fff 27%,#72eaff 51%,#b8a2ff 72%,#f1ce79 96%);background-size:220% auto;color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:none;filter:drop-shadow(0 0 17px rgba(85,234,255,.09));animation:outroTextIn .8s .28s both,metalSweep 6s linear infinite}
+.loop-sovereign-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;color:#e8c87d;font:500 clamp(8px,.9vw,11px) Orbitron,sans-serif;letter-spacing:.24em;text-transform:uppercase;animation:outroTextIn .8s .34s both}.loop-sovereign-line b{font-size:8px;color:var(--cyan);font-weight:500}
+.loop-outro-status{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 22px;color:#718ba1;font:7px Orbitron,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-top:4px;animation:outroTextIn .8s .4s both}.loop-outro-status span{display:inline-flex;align-items:center;gap:8px}.loop-outro-status span:last-child{color:#58768c}
+.loop-actions{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;animation:outroTextIn .85s .48s both}.loop-actions .mini-btn{min-height:34px;font-size:8px;padding:0 12px;background:rgba(4,12,24,.88);backdrop-filter:blur(6px)}#loopAudioBtn{border-color:rgba(232,200,125,.65);color:#f4d990}
+.loop-video-error{position:absolute;inset:0;z-index:7;background:rgba(2,5,12,.96);color:#ffdca0;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;text-align:center;padding:22px;font:12px/1.7 Rajdhani,Arial,sans-serif;letter-spacing:.06em}.loop-video-error strong{font:600 10px Orbitron,sans-serif;letter-spacing:.14em;color:#fff}.loop-video-error small{color:#9ab6c8;font-size:10px}
+.loop-video-error[hidden]{display:none!important}
+@keyframes loopOutroIn{from{opacity:0;filter:brightness(.65)}to{opacity:1;filter:brightness(1)}}
+@keyframes outroTextIn{from{opacity:0;transform:translateY(13px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes outroVideoIn{from{opacity:0;transform:scale(.94);filter:brightness(.45)}to{opacity:1;transform:scale(1);filter:brightness(1)}}
+@keyframes outroLightSweep{0%,100%{transform:translateX(-9%);opacity:.35}50%{transform:translateX(9%);opacity:.9}}
+@keyframes loopOutroSheen{0%,35%{left:-38%;opacity:0}46%{opacity:1}67%,100%{left:120%;opacity:0}}
+@keyframes loopLedPulse{0%,100%{opacity:.55;box-shadow:0 0 4px var(--cyan)}50%{opacity:1;box-shadow:0 0 14px var(--cyan)}}
+@media(max-height:680px){#loopView{padding-top:63px;padding-bottom:70px}.loop-outro{gap:4px}.loop-video-shell{width:min(34vh,260px,68vw);max-height:34vh}.loop-team-word{font-size:15px}.loop-falcon-word{font-size:clamp(33px,5.5vh,48px)}.loop-outro-status{margin-top:1px}.loop-actions{margin-top:3px}.loop-actions .mini-btn{min-height:31px}}
+@media(max-width:620px){#loopView{padding:66px 12px 85px}.loop-outro{gap:7px}.loop-outro-kicker{font-size:7px;letter-spacing:.12em;gap:7px}.loop-team-word{font-size:15px}.loop-video-shell{width:min(42vh,330px,76vw);max-height:42vh}.loop-falcon-word{font-size:clamp(38px,6.4vh,55px)}.loop-sovereign-line{font-size:7px;letter-spacing:.13em;gap:7px}.loop-outro-status{font-size:6px;letter-spacing:.08em;gap:5px 12px}.loop-actions{gap:6px}.loop-actions .mini-btn{font-size:7px;padding:0 8px;min-height:32px}}
+@media(prefers-reduced-motion:reduce){#loopView.active,.loop-outro-kicker,.loop-team-word,.loop-video-shell,.loop-falcon-word,.loop-sovereign-line,.loop-outro-status,.loop-actions,.loop-video-shell:after{animation:none!important}}
+
+</style>
+</head>
+<body>
+<div id="app">
+ <div class="cinema-sweep" aria-hidden="true"></div><div class="edge-glow"></div>
+ <div id="flash"></div>
+ <i class="frame-corner tl"></i><i class="frame-corner tr"></i><i class="frame-corner bl"></i><i class="frame-corner br"></i>
+ <header class="topbar"><div class="brand-mini"><span class="status-dot"></span> FALCON <span style="color:var(--gold)">//</span> SOVEREIGN</div><div class="top-right"><span class="dept-label">DEPARTMENT OF</span><br>ARTIFICIAL INTELLIGENCE <span>&amp;</span> MACHINE LEARNING</div></header>
+ <main class="stage" id="introView">
+  <section class="intro"><div class="eyebrow">Intelligence in flight</div><h1><span class="shine">THE NEXT ERA</span><br>IS ABOUT TO BEGIN.</h1><p>A new force. A new vision. A sovereign future.</p><div class="buttons"><button id="startBtn" class="primary-btn" type="button"><span class="play"></span> Initiate launch</button><button id="directBtn" class="secondary-btn" type="button">Play hero reveal ↗</button><button id="testLoopBtn" class="secondary-btn" type="button">Preview looping logo ↻</button></div><div class="intro-note">10-second launch sequence <span style="color:var(--gold)">◆</span> voice synchronized <span style="color:var(--gold)">◆</span> hero reveal</div></section>
+ </main>
+ <section id="countdownView" aria-live="polite"><div class="counter-wrap"><div class="counter-ring"></div><div class="counter-number" id="counterNumber">10</div><div class="phase-label" id="counterLabel">Systems awakening</div><div class="count-progress"><span id="countProgressFill"></span></div></div></section>
+ <section id="dialogueView" aria-label="Narrated launch sequence" aria-live="polite"><div class="dialogue-wrap"><div class="dialogue-kicker" id="dialogueKicker">VOICE SEQUENCE <span class="tiny-dot">◆</span> 01 / 09</div><h2 class="dialogue-text" id="dialogueText">SOME WAIT FOR THE FUTURE.</h2><div class="dialogue-rule"></div><div class="dialogue-sub" id="dialogueSub">THE NEXT ERA IS AWAKENING</div><div class="dialogue-progress"><span id="dialogueProgressFill"></span></div></div><div class="dialogue-meta">A NEW INTELLIGENCE RISES <span style="color:var(--gold)">/</span> FALCON SOVEREIGN</div></section>
+ <section id="videoView" aria-label="Official FALCON SOVEREIGN reveal"><div class="video-hud"></div><div class="video-topline"><span><b>●</b> Identity confirmed</span><span>Hero reveal // original video</span></div><div class="video-frame" id="videoFrame"><video id="revealVideo" preload="auto" playsinline poster="assets/falcon-poster.jpg"><source src="assets/falcon-hero-reveal.mp4" type="video/mp4">Your browser does not support HTML video.</video><div class="video-overlay" id="videoOverlay"><span>FALCON SOVEREIGN</span><strong>Powered by Innovation</strong></div></div><div class="video-bottomline"><span>Artificial intelligence × Machine learning</span><span>System status: <b style="color:var(--cyan);font-weight:500">online</b></span></div><div class="video-controls"><button class="mini-btn" id="replayVideoBtn" type="button">↻ Replay reveal</button><button class="mini-btn" id="finishBtn" type="button">Skip to final frame →</button></div></section>
+
+ <section id="loopView" aria-label="Team Falcon animated logo outro">
+  <div class="loop-outro">
+   <div class="loop-outro-kicker"><span class="loop-led"></span> OFFICIAL AI / ML FORUM <span class="loop-kicker-divider">//</span> FINAL IDENTITY</div>
+   <div class="loop-team-word">TEAM</div>
+   <div class="loop-video-shell" id="loopFrame">
+    <span class="loop-frame-corner top-left"></span><span class="loop-frame-corner top-right"></span><span class="loop-frame-corner bottom-left"></span><span class="loop-frame-corner bottom-right"></span>
+    <div class="loop-video-label"><span>ANIMATED LOGO</span><span class="loop-status-live"><i></i> LIVE LOOP</span></div>
+    <video id="loopVideo" preload="auto" playsinline loop poster="assets/falcon-poster.jpg" aria-label="Team Falcon animated logo, continuously looping"><source src="assets/falcon-logo-loop.mp4" type="video/mp4">Your browser does not support HTML video.</video>
+    <div class="loop-video-error" id="loopVideoError" hidden>
+      <div><strong>TEAM FALCON VIDEO NOT PLAYING</strong><br><span id="loopVideoErrorText">The browser could not load assets/falcon-logo-loop.mp4.</span><br><small>Keep the assets folder beside index.html and use START_FALCON.bat.</small></div>
+      <button class="mini-btn" id="retryLoopVideoBtn" type="button">↻ Retry logo video</button>
+    </div>
+   </div>
+   <h1 class="loop-falcon-word">FALCON</h1>
+   <div class="loop-sovereign-line"><span>SOVEREIGN</span><b>◆</b><span>POWERED BY INNOVATION</span></div>
+   <div class="loop-outro-status"><span><i class="loop-led"></i> ANIMATION REPEATS AUTOMATICALLY</span><span>PRESS ESC OR END PRESENTATION TO STOP</span></div>
+   <div class="loop-actions"><button class="mini-btn" id="restartLoopBtn" type="button">↻ Restart logo animation</button><button class="mini-btn hidden" id="loopAudioBtn" type="button">♫ Enable logo audio</button><button class="mini-btn" id="terminateLoopBtn" type="button">■ End presentation</button><button class="mini-btn" id="replayAllFromLoopBtn" type="button">↻ Replay full launch</button></div>
+  </div>
+ </section>
+
+ <section id="endView"><div class="end-card"><div class="end-overline">Department of Artificial Intelligence &amp; Machine Learning</div><h2 class="end-title">TEAM<br>FALCON</h2><div class="end-sub">SOVEREIGN · POWERED BY INNOVATION</div><div class="end-divider"></div><div class="buttons"><button class="primary-btn" id="replayAllBtn" type="button">↻ Replay full launch</button><button class="secondary-btn" id="watchAgainBtn" type="button">Watch hero reveal ↗</button></div></div></section>
+ <button class="sound-btn on" id="soundBtn" type="button" aria-pressed="true"><span class="sound-led"></span><span id="soundLabel">SOUND ON</span></button><button class="skip-btn hidden" id="skipBtn" type="button">Skip countdown ↗</button>
+ <footer class="bottom-bar"><span>AI <b>×</b> ML DEPARTMENT</span><span class="bottom-center">INTELLIGENCE IN FLIGHT <b>—</b> INNOVATION IN MOTION</span><span>TEAM FALCON <b>◇</b> SOVEREIGN</span></footer>
+ <div id="liveStatus" class="sr-only" aria-live="polite"></div>
+ <audio id="narration" preload="auto"><source src="assets/falcon-narration.mp3" type="audio/mpeg"></audio>
+ <audio id="backgroundMusic" preload="auto"><source src="assets/mountain-leadership.mp3" type="audio/mpeg"></audio>
+</div>
+<script>
+(() => {
+ 'use strict';
+ const $ = id => document.getElementById(id);
+ const intro=$('introView'), countView=$('countdownView'), dialogueView=$('dialogueView'), videoView=$('videoView'), loopView=$('loopView'), endView=$('endView');
+ const narration=$('narration'), video=$('revealVideo'), loopVideo=$('loopVideo'), music=$('backgroundMusic'), soundBtn=$('soundBtn'), soundLabel=$('soundLabel'), skipBtn=$('skipBtn');
+ const stages=[intro,countView,dialogueView,videoView,loopView,endView];
+ let timers=[], launchToken=0, soundOn=true, launchPhase='intro', dialogueRaf=0, activeCue=-1, audioCtx=null, masterGain=null, musicMode='off';
+ const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];};
+ function later(fn,ms,token=launchToken){const id=setTimeout(()=>{if(token===launchToken)fn();},ms);timers.push(id);return id;}
+ function show(which){stages.forEach(x=>x.classList.remove('active'));which.classList.add('active');launchPhase=which.id.replace('View','').toLowerCase();}
+ function announce(s){$('liveStatus').textContent=s;}
+ function flash(){const f=$('flash');f.classList.remove('fire');void f.offsetWidth;f.classList.add('fire');}
+ function initAudio(){
+  if(audioCtx)return;
+  try{
+   audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+   masterGain=audioCtx.createGain();masterGain.gain.value=soundOn?.58:0;masterGain.connect(audioCtx.destination);
+   audioCtx.resume();
+  }catch(e){audioCtx=null;}
+ }
+ let musicFadeTimer=null;
+ function rampMusicTo(target,ms=500){
+  if(musicFadeTimer){clearInterval(musicFadeTimer);musicFadeTimer=null;}
+  if(!soundOn){music.muted=true;return;}
+  music.muted=false;
+  const from=Number.isFinite(music.volume)?music.volume:0.18;
+  const began=performance.now();
+  musicFadeTimer=setInterval(()=>{
+   const p=Math.min(1,(performance.now()-began)/Math.max(80,ms));
+   const eased=p*p*(3-2*p);
+   music.volume=Math.max(0,Math.min(1,from+(target-from)*eased));
+   if(p>=1){clearInterval(musicFadeTimer);musicFadeTimer=null;}
+  },24);
+ }
+ async function startMusic(){
+  if(!soundOn)return;
+  if(musicFadeTimer){clearInterval(musicFadeTimer);musicFadeTimer=null;}
+  music.pause();music.currentTime=0;music.muted=false;music.volume=.001;
+  try{await music.play();rampMusicTo(.29,1200);}catch(e){/* Browser may require a second user click; sound control remains available. */}
+ }
+ function stopMusic(reset=true){
+  if(musicFadeTimer){clearInterval(musicFadeTimer);musicFadeTimer=null;}
+  music.pause();if(reset){try{music.currentTime=0;}catch(e){}}
+ }
+ function fadeMusicOut(ms=520){
+  if(music.paused){music.volume=.001;return;}
+  rampMusicTo(.001,ms);
+  later(()=>stopMusic(true),ms+40,launchToken);
+ }
+ function setMusicMode(mode){
+  musicMode=mode;
+  if(mode==='countdown'){
+   if(music.paused&&soundOn)startMusic();
+   else rampMusicTo(.29,700);
+  }else if(mode==='dialogue'){
+   rampMusicTo(.19,650);
+  }else if(mode==='video'){
+   fadeMusicOut(360);
+  }else if(mode==='loop'||mode==='end'||mode==='off'){
+   stopMusic(true);
+  }
+ }
+ function setSound(on){
+  soundOn=on;soundBtn.classList.toggle('on',on);soundBtn.setAttribute('aria-pressed',String(on));soundLabel.textContent=on?'SOUND ON':'SOUND OFF';
+  narration.muted=!on;video.muted=!on;loopVideo.muted=!on;music.muted=!on;
+  if(!audioCtx&&on&&launchPhase!=='intro')initAudio();
+  if(masterGain&&audioCtx)masterGain.gain.setTargetAtTime(on?.58:0,audioCtx.currentTime,.08);
+  if(on&&audioCtx)audioCtx.resume();
+  if(on&&launchPhase==='countdown'&&music.paused)startMusic();
+ }
+ function impact(freq=54,intensity=1,duration=.72){if(!soundOn)return;initAudio();if(!audioCtx||!masterGain)return;const now=audioCtx.currentTime;const osc=audioCtx.createOscillator(),gain=audioCtx.createGain(),filter=audioCtx.createBiquadFilter();osc.type='sine';osc.frequency.setValueAtTime(freq,now);osc.frequency.exponentialRampToValueAtTime(Math.max(26,freq*.52),now+duration);filter.type='lowpass';filter.frequency.value=220;gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.2*intensity,now+.035);gain.gain.exponentialRampToValueAtTime(.0001,now+duration);osc.connect(filter);filter.connect(gain);gain.connect(masterGain);osc.start(now);osc.stop(now+duration+.06);
+  // Short airy sweep above the impact.
+  const sw=audioCtx.createOscillator(),sg=audioCtx.createGain(),sf=audioCtx.createBiquadFilter();sw.type='triangle';sw.frequency.setValueAtTime(240,now);sw.frequency.exponentialRampToValueAtTime(900,now+.22);sf.type='lowpass';sf.frequency.setValueAtTime(500,now);sf.frequency.exponentialRampToValueAtTime(1900,now+.25);sg.gain.setValueAtTime(.0001,now);sg.gain.exponentialRampToValueAtTime(.035*intensity,now+.08);sg.gain.exponentialRampToValueAtTime(.0001,now+.42);sw.connect(sf);sf.connect(sg);sg.connect(masterGain);sw.start(now);sw.stop(now+.45);
+ }
+ soundBtn.addEventListener('click',()=>setSound(!soundOn));
+ const countLabels=['Systems check','Intelligence core online','Scanning for innovation','Portal synchronisation','Power sequence ready'];
+ function beginLaunch(){launchToken++;clearTimers();const token=launchToken;narration.pause();narration.currentTime=0;video.pause();video.currentTime=0;loopVideo.pause();loopVideo.currentTime=0;intro.classList.add('fade-out');initAudio();startMusic();setMusicMode('countdown');show(countView);skipBtn.classList.remove('hidden');skipBtn.textContent='Skip countdown ↗';let n=10;$('counterNumber').textContent='10';$('counterLabel').textContent=countLabels[0];$('countProgressFill').style.transform='scaleX(0)';impact(58,.68,.7);const start=performance.now();function tick(){if(token!==launchToken)return;const elapsed=(performance.now()-start)/1000;const next=Math.max(0,10-Math.floor(elapsed));if(next>=1){if(Number($('counterNumber').textContent)!==next){$('counterNumber').textContent=String(next).padStart(2,'0');$('counterNumber').classList.remove('counter-number');void $('counterNumber').offsetWidth;$('counterNumber').classList.add('counter-number');$('counterLabel').textContent=countLabels[(10-next)%countLabels.length];impact(next<=3?65:40,.42,.3);} $('countProgressFill').style.transform=`scaleX(${Math.min(1,elapsed/10)})`;later(tick,80,token);}else{ $('countProgressFill').style.transform='scaleX(1)';$('counterNumber').textContent='01';$('counterLabel').textContent='Launch initiated';flash();impact(82,1.15,.95);later(()=>beginNarration(token),650,token);}}later(tick,80,token);}
+ const cues=[
+  {at:0.00,text:'Some wait for the future...',accent:'future...',sub:'THE NEXT ERA IS AWAKENING'},
+  {at:2.64,text:'Some fear what it might become.',accent:'become.',sub:'POSSIBILITY HAS NO LIMITS'},
+  {at:5.32,text:'But a few...',accent:'few...',sub:'THE CHOICE CHANGES EVERYTHING'},
+  {at:6.48,text:'Choose to create it.',accent:'create it.',sub:'INTELLIGENCE IN MOTION'},
+  {at:8.51,text:'Intelligence is our weapon.',accent:'weapon.',sub:'FOCUSED MINDS. LIMITLESS INVENTION.'},
+  {at:10.76,text:'Innovation is our hunt.',accent:'hunt.',sub:'THE PURSUIT BEGINS NOW'},
+  {at:13.07,text:'We are Team Falcon.',accent:'Team Falcon.',sub:'THE TEAM REVEALED'},
+  {at:15.52,text:"The future isn't our destination.",accent:'destination.',sub:'THE FUTURE IS OURS TO CREATE'},
+  {at:18.05,text:"It's our creation.",accent:'creation.',sub:'POWERED BY INNOVATION'}
+ ];
+ function esc(s){return s.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+ function makeAnimatedText(text,accent){const words=text.split(' ');const accentSet=new Set(accent.split(' ').map(w=>w.toLowerCase().replace(/[.,…!?]/g,'')));let index=0;return words.map(word=>{const wordKey=word.toLowerCase().replace(/[.,…!?]/g,'');const active=accentSet.has(wordKey);const klass=active?'word accent':'word';const chars=Array.from(word).map(ch=>{const html=esc(ch);const delay=Math.min(index++*0.025,0.7);return `<span class="glyph" style="--delay:${delay.toFixed(3)}s">${html}</span>`;}).join('');return `<span class="${klass}">${chars}</span>`;}).join(' ');}
+ function showCue(i){if(i<0||i>=cues.length||i===activeCue)return;activeCue=i;const q=cues[i];const dw=document.querySelector('.dialogue-wrap');dw.classList.remove('sweep');void dw.offsetWidth;dw.classList.add('sweep');$('dialogueKicker').innerHTML=`NARRATION SEQUENCE <span class="tiny-dot">◆</span> ${String(i+1).padStart(2,'0')} / ${String(cues.length).padStart(2,'0')}`;$('dialogueText').innerHTML=makeAnimatedText(q.text,q.accent);$('dialogueSub').textContent=q.sub;const text=$('dialogueText');text.classList.remove('enter');void text.offsetWidth;text.classList.add('enter');const sub=$('dialogueSub');sub.style.animation='none';void sub.offsetWidth;sub.style.animation='subEnter .65s .25s ease forwards';if([0,2,4,5,6,8].includes(i))impact(i===6?72:48,i===6?1:.42,i===6?.8:.35);if(i===2||i===6||i===8)flash();announce(q.text);}
+ function updateDialogue(){if(launchPhase!=='dialogue')return;const t=narration.currentTime;let idx=0;for(let i=0;i<cues.length;i++){if(t>=cues[i].at)idx=i;else break;}showCue(idx);$('dialogueProgressFill').style.transform=`scaleX(${Math.min(1,t/Math.max(1,narration.duration||19.88))})`;}
+ function syncNarration(){if(launchPhase!=='dialogue')return;updateDialogue();dialogueRaf=requestAnimationFrame(syncNarration);}
+ async function beginNarration(token=launchToken){if(token!==launchToken)return;show(dialogueView);skipBtn.classList.remove('hidden');skipBtn.textContent='Skip to falcon ↗';activeCue=-1;setMusicMode('dialogue');narration.currentTime=0;narration.muted=!soundOn;music.muted=!soundOn;try{await narration.play();syncNarration();announce('Cinematic narration started.');}catch(e){$('dialogueSub').textContent='CLICK PLAY AUDIO TO CONTINUE';const retry=document.createElement('button');retry.className='mini-btn';retry.textContent='Play narration';retry.onclick=()=>narration.play().then(syncNarration).catch(()=>{});$('dialogueSub').appendChild(retry);}}
+ async function playVideo(token=launchToken){if(token!==launchToken)return;clearTimers();cancelAnimationFrame(dialogueRaf);narration.pause();loopVideo.pause();try{loopVideo.currentTime=0;}catch(e){}show(videoView);skipBtn.classList.add('hidden');setMusicMode('video');video.currentTime=0;video.muted=!soundOn;video.controls=false;flash();impact(72,.9,.85);try{await video.play();}catch(e){$('videoOverlay').style.opacity='1';$('replayVideoBtn').textContent='▶ Play hero reveal';}announce('FALCON SOVEREIGN hero reveal is playing.');}
+ async function waitForLoopMedia(forceReload=false){
+  if(!forceReload && loopVideo.readyState>=2)return;
+  await new Promise((resolve,reject)=>{
+    let settled=false;
+    const cleanup=()=>{clearTimeout(timer);loopVideo.removeEventListener('loadeddata',ok);loopVideo.removeEventListener('canplay',ok);loopVideo.removeEventListener('error',bad);};
+    const finish=(fn,val)=>{if(settled)return;settled=true;cleanup();fn(val);};
+    const ok=()=>finish(resolve);
+    const bad=()=>finish(reject,new Error('Browser could not decode assets/falcon-logo-loop.mp4.'));
+    const timer=setTimeout(()=>finish(reject,new Error('Timed out loading assets/falcon-logo-loop.mp4.')),12000);
+    loopVideo.addEventListener('loadeddata',ok);
+    loopVideo.addEventListener('canplay',ok);
+    loopVideo.addEventListener('error',bad);
+    if(forceReload)loopVideo.load();
+    else if(loopVideo.networkState===HTMLMediaElement.NETWORK_EMPTY)loopVideo.load();
+  });
+ }
+ async function startLoopMedia(token=launchToken,forceReload=false){
+  if(token!==launchToken || launchPhase!=='loop')return;
+  const errPanel=$('loopVideoError'),errText=$('loopVideoErrorText');
+  errPanel.hidden=true;
+  loopVideo.loop=true;loopVideo.autoplay=true;loopVideo.controls=false;loopVideo.playsInline=true;
+  loopVideo.setAttribute('loop','');loopVideo.setAttribute('playsinline','');
+  $('loopAudioBtn').classList.add('hidden');
+  try{
+    await waitForLoopMedia(forceReload);
+    if(token!==launchToken || launchPhase!=='loop')return;
+    try{loopVideo.currentTime=0;}catch(e){}
+    loopVideo.muted=!soundOn;
+    await loopVideo.play();
+    if(token!==launchToken)return;
+    errPanel.hidden=true;
+    announce('Team Falcon animated logo is looping.');
+  }catch(firstError){
+    try{
+      if(token!==launchToken || launchPhase!=='loop')return;
+      loopVideo.muted=true;
+      try{loopVideo.currentTime=0;}catch(e){}
+      await loopVideo.play();
+      errPanel.hidden=true;
+      $('loopAudioBtn').classList.remove('hidden');
+      announce('Team Falcon logo is looping silently. Select Enable logo audio to hear the clip soundtrack.');
+    }catch(secondError){
+      if(token!==launchToken || launchPhase!=='loop')return;
+      errText.textContent=`${secondError && secondError.message ? secondError.message : (firstError && firstError.message ? firstError.message : 'Playback failed.')} Confirm assets/falcon-logo-loop.mp4 exists in this extracted folder.`;
+      errPanel.hidden=false;
+      $('loopAudioBtn').classList.add('hidden');
+      announce('The Team Falcon video could not start. Use Retry logo video or check the assets folder.');
+      console.error('Logo video playback failed:',firstError,secondError,'source=',loopVideo.currentSrc);
+    }
+  }
+ }
+ async function playLogoLoop(token=launchToken){
+  if(token!==launchToken || launchPhase==='loop')return;
+  clearTimers();cancelAnimationFrame(dialogueRaf);narration.pause();video.pause();
+  show(loopView);skipBtn.classList.add('hidden');stopMusic(true);
+  announce('Loading the Team Falcon animated logo.');
+  await startLoopMedia(token,false);
+ }
+ function restartLogoLoop(){
+  if(launchPhase!=='loop'){playLogoLoop(launchToken);return;}
+  try{loopVideo.currentTime=0;}catch(e){}
+  startLoopMedia(launchToken,false);
+ }
+ function terminateLogoLoop(){launchToken++;clearTimers();loopVideo.pause();try{loopVideo.currentTime=0;}catch(e){}show(endView);setMusicMode('end');skipBtn.classList.add('hidden');flash();announce('Presentation ended.');}
+ function replayVideo(){launchToken++;clearTimers();narration.pause();narration.currentTime=0;loopVideo.pause();loopVideo.currentTime=0;video.pause();video.currentTime=0;playVideo(launchToken);}
+ function finishVideo(){video.pause();try{video.currentTime=Math.max(0,video.duration-.08);}catch(e){}playLogoLoop(launchToken);}
+ function resetAll(){launchToken++;clearTimers();cancelAnimationFrame(dialogueRaf);narration.pause();narration.currentTime=0;video.pause();video.currentTime=0;loopVideo.pause();loopVideo.currentTime=0;activeCue=-1;intro.classList.remove('fade-out');show(intro);setMusicMode('off');skipBtn.classList.add('hidden');}
+ narration.addEventListener('ended',()=>{cancelAnimationFrame(dialogueRaf);$('dialogueProgressFill').style.transform='scaleX(1)';fadeMusicOut(520);later(()=>playVideo(launchToken),560,launchToken);});
+ video.addEventListener('ended',()=>{if(launchPhase==='video')playLogoLoop(launchToken);});
+ video.addEventListener('error',()=>{if(launchPhase==='video'){announce('Hero reveal could not play; opening the Team Falcon logo loop instead.');playLogoLoop(launchToken);}});
+ $('startBtn').addEventListener('click',beginLaunch);$('directBtn').addEventListener('click',()=>{launchToken++;clearTimers();initAudio();playVideo(launchToken);});
+ $('testLoopBtn').addEventListener('click',()=>{launchToken++;clearTimers();narration.pause();video.pause();loopVideo.pause();playLogoLoop(launchToken);});
+ skipBtn.addEventListener('click',()=>{if(launchPhase==='countdown'){launchToken++;clearTimers();beginNarration(launchToken);}else if(launchPhase==='dialogue'){launchToken++;clearTimers();playVideo(launchToken);}});
+ loopVideo.addEventListener('loadeddata',()=>{if(launchPhase==='loop')$('loopVideoError').hidden=true;});loopVideo.addEventListener('canplay',()=>{if(launchPhase==='loop')$('loopVideoError').hidden=true;});loopVideo.addEventListener('error',()=>{if(launchPhase==='loop'){$('loopVideoErrorText').textContent='The browser reported a media error. Check that assets/falcon-logo-loop.mp4 is a valid MP4 and retry.';$('loopVideoError').hidden=false;}});
+ $('retryLoopVideoBtn').addEventListener('click',async()=>{try{loopVideo.pause();loopVideo.currentTime=0;loopVideo.removeAttribute('src');const source=loopVideo.querySelector('source');if(source)source.src='assets/falcon-logo-loop.mp4';$('loopVideoError').hidden=true;await startLoopMedia(launchToken,true);}catch(e){$('loopVideoErrorText').textContent='Retry failed: '+e.message;$('loopVideoError').hidden=false;}});
+ $('replayVideoBtn').addEventListener('click',replayVideo);$('finishBtn').addEventListener('click',finishVideo);$('replayAllBtn').addEventListener('click',resetAll);$('watchAgainBtn').addEventListener('click',replayVideo);$('restartLoopBtn').addEventListener('click',restartLogoLoop);$('terminateLoopBtn').addEventListener('click',terminateLogoLoop);$('replayAllFromLoopBtn').addEventListener('click',resetAll);
+ $('loopAudioBtn').addEventListener('click',async()=>{soundOn=true;soundBtn.classList.add('on');soundBtn.setAttribute('aria-pressed','true');soundLabel.textContent='SOUND ON';loopVideo.muted=false;music.muted=false;try{await loopVideo.play();$('loopAudioBtn').classList.add('hidden');announce('Logo video audio enabled.');}catch(e){loopVideo.muted=true;announce('Logo audio could not be enabled. The visual loop continues muted.');}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&launchPhase==='loop')terminateLogoLoop();});
+ // The supplied music track is used under narration and fades out before the reveal video.
+ // Initial state remains silent until the visitor initiates the launch.
+ show(intro);
+})();
+</script>
+</body>
+</html>
